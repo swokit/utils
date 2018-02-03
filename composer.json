@@ -1,0 +1,27 @@
+{
+  "name": "swoole-libs/utils",
+  "type": "library",
+  "description": "some utils tool library of the swoole",
+  "keywords": ["library","tool","php"],
+  "homepage": "https://github.com/swoole-libs/utils",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "inhere",
+      "email": "in.798@qq.com",
+      "homepage": "http://www.yzone.net/"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SwooleLib\\Util\\" : "src/"
+    }
+  },
+  "suggest": {
+    "inhere/php-validate": "Very lightweight data validate tool",
+    "inhere/console": "a lightweight php console application library."
+  }
+}
