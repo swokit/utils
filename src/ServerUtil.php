@@ -15,7 +15,7 @@ use Swoole\Server;
  * Class ServerHelper
  * @package SwooleLib\Util
  */
-class ServerUtil
+final class ServerUtil
 {
     /**
      * @throws \RuntimeException

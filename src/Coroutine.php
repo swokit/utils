@@ -82,6 +82,10 @@ class Coroutine
      */
     public static function sleep($seconds)
     {
+        if (!ServerUtil::coroutineIsEnabled()) {
+            return;
+        }
+
         SwCoroutine::sleep($seconds);
     }
 
@@ -91,6 +95,10 @@ class Coroutine
      */
     public static function suspend($coId)
     {
+        if (!ServerUtil::coroutineIsEnabled()) {
+            return;
+        }
+
         SwCoroutine::suspend($coId);
     }
 
@@ -100,6 +108,10 @@ class Coroutine
      */
     public static function resume($coId)
     {
+        if (!ServerUtil::coroutineIsEnabled()) {
+            return;
+        }
+
         SwCoroutine::resume($coId);
     }
 }
