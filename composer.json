@@ -1,5 +1,5 @@
 {
-  "name": "swoole-libs/utils",
+  "name": "swoole-kit/utils",
   "type": "library",
   "description": "some utils tool library of the swoole",
   "keywords": ["library","tool","php"],
@@ -14,12 +14,12 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "mylib/php-utils": "~1.0",
-    "mylib/sys-utils": "~1.0"
+    "toolkit/php-utils": "~1.0",
+    "toolkit/sys-utils": "~1.0"
   },
   "autoload": {
     "psr-4": {
-      "SwooleLib\\Util\\" : "src/"
+      "SwooleKit\\Util\\" : "src/"
     }
   },
   "suggest": {
