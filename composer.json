@@ -3,7 +3,7 @@
   "type": "library",
   "description": "some utils tool library of the swoole",
   "keywords": ["library","tool","php"],
-  "homepage": "https://github.com/swoole-libs/utils",
+  "homepage": "https://github.com/swoole-kit/utils",
   "license": "MIT",
   "authors": [
     {

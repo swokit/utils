@@ -3,7 +3,7 @@
 ## install 
 
 ```bash
-composer require swoole-libs/utils
+composer require swoole-kit/utils
 ```
 
 ## license

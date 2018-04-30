@@ -6,14 +6,14 @@
  * Time: 14:33
  */
 
-namespace SwooleLib\Util;
+namespace SwooleKit\Util;
 
-use MyLib\PhpUtil\PhpHelper;
+use Toolkit\PhpUtil\PhpHelper;
 use Swoole\Coroutine as SwCoroutine;
 
 /**
  * Class Coroutine
- * @package SwooleLib\Util
+ * @package SwooleKit\Util
  */
 class Coroutine
 {
