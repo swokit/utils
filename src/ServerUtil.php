@@ -34,7 +34,7 @@ final class ServerUtil
     /**
      * see Runtime Env
      */
-    public static function getRuntimeEnv()
+    public static function getRuntimeEnv(): array
     {
         $yes = '<info>√</info>';
         $no = '<danger>X</danger>';
@@ -71,7 +71,7 @@ final class ServerUtil
      */
     public static function isSupportCoroutine(): bool
     {
-        return class_exists(Coroutine::class, false);
+        return \class_exists(Coroutine::class, false);
     }
 
     /**
@@ -93,15 +93,15 @@ final class ServerUtil
      */
     public static function getPidFromFile(string $file, bool $checkLive = false): int
     {
-        if ($file && file_exists($file)) {
-            $pid = (int)file_get_contents($file);
+        if ($file && \file_exists($file)) {
+            $pid = (int)\file_get_contents($file);
 
             // check live
             if ($checkLive && self::isRunning($pid)) {
                 return $pid;
             }
 
-            unlink($file);
+            \unlink($file);
         }
 
         return 0;
@@ -112,10 +112,10 @@ final class ServerUtil
      * @param string $pidFile
      * @return bool|int
      */
-    public static function createPidFile(int $masterPid, $pidFile)
+    public static function createPidFile(int $masterPid, string $pidFile)
     {
         if ($pidFile) {
-            return file_put_contents($pidFile, $masterPid);
+            return \file_put_contents($pidFile, $masterPid);
         }
 
         return false;
@@ -125,10 +125,10 @@ final class ServerUtil
      * @param string $pidFile
      * @return bool
      */
-    public static function removePidFile($pidFile): bool
+    public static function removePidFile(string $pidFile): bool
     {
-        if ($pidFile && file_exists($pidFile)) {
-            return unlink($pidFile);
+        if ($pidFile && \file_exists($pidFile)) {
+            return \unlink($pidFile);
         }
 
         return false;

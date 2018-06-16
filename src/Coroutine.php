@@ -8,8 +8,9 @@
 
 namespace SwooleKit\Util;
 
+use Swoole\Channel;
 use Toolkit\PhpUtil\PhpHelper;
-use Swoole\Coroutine as SwCoroutine;
+use Swoole\Coroutine as SwCo;
 
 /**
  * Class Coroutine
@@ -30,30 +31,39 @@ class Coroutine
 
     /**
      * get current coroutine id
-     * @return int|string
+     * @return int
      */
-    public static function id()
+    public static function id(): int
     {
         if (!ServerUtil::coroutineIsEnabled()) {
-            return 0;
+            return -1;
         }
 
-        return SwCoroutine::getuid();
+        return SwCo::getuid();
     }
 
     /**
      * get top coroutine id
-     * @return int|string
+     * @return int
      */
-    public static function tid()
+    public static function tid(): int
     {
         if (!ServerUtil::coroutineIsEnabled()) {
-            return 0;
+            return -1;
         }
 
-        $id = SwCoroutine::getuid();
+        $id = SwCo::getuid();
 
         return self::$idMap[$id] ?? $id;
+    }
+
+    /**
+     * @param callable $cb
+     * @return bool
+     */
+    public static function go(callable $cb): bool
+    {
+        return self::create($cb);
     }
 
     /**
@@ -61,7 +71,7 @@ class Coroutine
      * @param callable $cb
      * @return bool
      */
-    public static function create(callable $cb)
+    public static function create(callable $cb): bool
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return false;
@@ -69,12 +79,27 @@ class Coroutine
 
         $tid = self::tid();
 
-        return SwCoroutine::create(function() use($cb, $tid) {
-            $id = SwCoroutine::getuid();
+        return SwCo::create(function() use($cb, $tid) {
+            $id = SwCo::getuid();
             self::$idMap[$id] = $tid;
 
             PhpHelper::call($cb);
         });
+    }
+
+    /**
+     * @param callable $cb
+     * @return mixed
+     */
+    public static function await(callable $cb)
+    {
+        // $ch = new Channel(0);
+        // $tid = self::tid();
+        //
+        // SwCo::create(function () use($cb, $ch, $tid) {
+        //     $ret = $cb();
+        //     $ch->push($ret);
+        // });
     }
 
     /**
@@ -86,7 +111,7 @@ class Coroutine
             return;
         }
 
-        SwCoroutine::sleep($seconds);
+        SwCo::sleep($seconds);
     }
 
     /**
@@ -99,7 +124,7 @@ class Coroutine
             return;
         }
 
-        SwCoroutine::suspend($coId);
+        SwCo::suspend($coId);
     }
 
     /**
@@ -112,6 +137,6 @@ class Coroutine
             return;
         }
 
-        SwCoroutine::resume($coId);
+        SwCo::resume($coId);
     }
 }
