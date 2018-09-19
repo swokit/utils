@@ -6,7 +6,7 @@
  * Time: 14:33
  */
 
-namespace SwooleKit\Util;
+namespace SwoKit\Util;
 
 use Swoole\Channel;
 use Toolkit\PhpUtil\PhpHelper;
@@ -14,7 +14,7 @@ use Swoole\Coroutine as SwCo;
 
 /**
  * Class Coroutine
- * @package SwooleKit\Util
+ * @package SwoKit\Util
  */
 class Coroutine
 {

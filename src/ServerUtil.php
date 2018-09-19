@@ -6,14 +6,14 @@
  * Time: 19:09
  */
 
-namespace SwooleKit\Util;
+namespace SwoKit\Util;
 
 use Swoole\Coroutine;
 use Swoole\Server;
 
 /**
  * Class ServerHelper
- * @package SwooleKit\Util
+ * @package SwoKit\Util
  */
 final class ServerUtil
 {

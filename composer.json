@@ -1,9 +1,9 @@
 {
-  "name": "swoole-kit/utils",
+  "name": "swokit/utils",
   "type": "library",
   "description": "some utils tool library of the swoole",
   "keywords": ["library","tool","php"],
-  "homepage": "https://github.com/swoole-kit/utils",
+  "homepage": "https://github.com/swokit/utils",
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SwooleKit\\Util\\" : "src/"
+      "SwoKit\\Util\\" : "src/"
     }
   },
   "suggest": {
