@@ -6,11 +6,11 @@
  * Time: 21:11
  */
 
-namespace SwoKit\Util;
+namespace Swokit\Util;
 
 /**
  * Class Co
- * @package SwoKit\Util
+ * @package Swokit\Util
  */
 final class Co extends Coroutine
 {

@@ -6,15 +6,14 @@
  * Time: 14:33
  */
 
-namespace SwoKit\Util;
+namespace Swokit\Util;
 
-use Swoole\Channel;
-use Toolkit\PhpUtil\PhpHelper;
 use Swoole\Coroutine as SwCo;
+use Toolkit\PhpUtil\PhpHelper;
 
 /**
  * Class Coroutine
- * @package SwoKit\Util
+ * @package Swokit\Util
  */
 class Coroutine
 {
@@ -79,7 +78,7 @@ class Coroutine
 
         $tid = self::tid();
 
-        return SwCo::create(function() use($cb, $tid) {
+        return SwCo::create(function () use ($cb, $tid) {
             $id = SwCo::getuid();
             self::$idMap[$id] = $tid;
 

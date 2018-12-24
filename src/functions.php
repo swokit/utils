@@ -9,21 +9,22 @@
 if (!function_exists('co')) {
     function co(callable $cb)
     {
-        return \SwoKit\Util\Coroutine::create($cb);
+        return \Swokit\Util\Coroutine::create($cb);
     }
 }
 
 // if (!function_exists('await')) {
 //     function await(callable $cb)
 //     {
-//         return \SwoKit\Util\Coroutine::await($cb);
+//         return \Swokit\Util\Coroutine::await($cb);
 //     }
 // }
 
-function await(Closure $fn) {
+function await(Closure $fn)
+{
     $ch = new chan(1);
 
-    go(function () use($fn, $ch) {
+    go(function () use ($fn, $ch) {
         $ret = $fn();
         $ch->push($ret);
     });
@@ -32,12 +33,13 @@ function await(Closure $fn) {
     return $ch->pop();
 }
 
-function await_multi(Closure ...$fns) {
+function await_multi(Closure ...$fns)
+{
     $len = count($fns);
     $ch = new chan($len);
 
     foreach ($fns as $fn) {
-        go(function () use($fn, $ch) {
+        go(function () use ($fn, $ch) {
             $ret = $fn();
             $ch->push($ret);
         });
