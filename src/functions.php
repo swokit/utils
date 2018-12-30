@@ -24,36 +24,12 @@ if (!function_exists('sco')) {
 //     }
 // }
 
-function await(Closure $fn)
+function await(callable $fn, float $timeout = 2)
 {
-    $ch = new \Swoole\Coroutine\Channel(1);
-
-    go(function () use ($fn, $ch) {
-        $ret = $fn();
-        $ch->push($ret);
-    });
-
-    // var_dump(\Co::getuid());
-    return $ch->pop();
+    return \Swokit\Util\Await::run($fn, $timeout);
 }
 
-function await_multi(float $timeout, Closure ...$fns)
+function await_multi(array $fns, float $timeout = 2)
 {
-    $len = \count($fns);
-    $chan = new \Swoole\Coroutine\Channel($len);
-
-    foreach ($fns as $fn) {
-        go(function () use ($fn, $chan) {
-            $ret = $fn();
-            $chan->push($ret);
-        });
-    }
-
-    $results = [];
-
-    for ($i = 0; $i < $len; $i++) {
-        $results[] = $chan->pop();
-    }
-
-    return $results;
+    return \Swokit\Util\Await::multi($fns, $timeout);
 }

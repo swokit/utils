@@ -80,6 +80,7 @@ class Coroutine
 
         return SwCoroutine::create(function () use ($cb, $tid) {
             $id = SwCoroutine::getuid();
+
             self::$idMap[$id] = $tid;
 
             PhpHelper::call($cb);
