@@ -6,8 +6,12 @@
  * Time: 16:03
  */
 
-if (!function_exists('co')) {
-    function co(callable $cb)
+if (!function_exists('sco')) {
+    /**
+     * @param callable $cb
+     * @return bool
+     */
+    function sco(callable $cb)
     {
         return \Swokit\Util\Coroutine::create($cb);
     }
@@ -22,7 +26,7 @@ if (!function_exists('co')) {
 
 function await(Closure $fn)
 {
-    $ch = new chan(1);
+    $ch = new \Swoole\Coroutine\Channel(1);
 
     go(function () use ($fn, $ch) {
         $ret = $fn();
@@ -33,22 +37,22 @@ function await(Closure $fn)
     return $ch->pop();
 }
 
-function await_multi(Closure ...$fns)
+function await_multi(float $timeout, Closure ...$fns)
 {
-    $len = count($fns);
-    $ch = new chan($len);
+    $len = \count($fns);
+    $chan = new \Swoole\Coroutine\Channel($len);
 
     foreach ($fns as $fn) {
-        go(function () use ($fn, $ch) {
+        go(function () use ($fn, $chan) {
             $ret = $fn();
-            $ch->push($ret);
+            $chan->push($ret);
         });
     }
 
     $results = [];
 
     for ($i = 0; $i < $len; $i++) {
-        $results[] = $ch->pop();
+        $results[] = $chan->pop();
     }
 
     return $results;

@@ -9,6 +9,7 @@
 namespace Swokit\Util;
 
 use Swoole\Coroutine;
+use Swoole\Process;
 use Swoole\Server;
 
 /**
@@ -140,6 +141,6 @@ final class ServerUtil
      */
     public static function isRunning(int $pid): bool
     {
-        return ($pid > 0) && @posix_kill($pid, 0);
+        return ($pid > 0) && Process::kill($pid, 0);
     }
 }

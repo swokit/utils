@@ -8,7 +8,7 @@
 
 namespace Swokit\Util;
 
-use Swoole\Coroutine as SwCo;
+use Swoole\Coroutine as SwCoroutine;
 use Toolkit\PhpUtil\PhpHelper;
 
 /**
@@ -38,7 +38,7 @@ class Coroutine
             return -1;
         }
 
-        return SwCo::getuid();
+        return SwCoroutine::getuid();
     }
 
     /**
@@ -51,16 +51,16 @@ class Coroutine
             return -1;
         }
 
-        $id = SwCo::getuid();
+        $id = SwCoroutine::getuid();
 
         return self::$idMap[$id] ?? $id;
     }
 
     /**
      * @param callable $cb
-     * @return bool
+     * @return bool|int
      */
-    public static function go(callable $cb): bool
+    public static function go(callable $cb)
     {
         return self::create($cb);
     }
@@ -68,9 +68,9 @@ class Coroutine
     /**
      * create a child coroutine
      * @param callable $cb
-     * @return bool
+     * @return bool|int success return CID, fail return false.
      */
-    public static function create(callable $cb): bool
+    public static function create(callable $cb)
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return false;
@@ -78,27 +78,12 @@ class Coroutine
 
         $tid = self::tid();
 
-        return SwCo::create(function () use ($cb, $tid) {
-            $id = SwCo::getuid();
+        return SwCoroutine::create(function () use ($cb, $tid) {
+            $id = SwCoroutine::getuid();
             self::$idMap[$id] = $tid;
 
             PhpHelper::call($cb);
         });
-    }
-
-    /**
-     * @param callable $cb
-     * @return mixed
-     */
-    public static function await(callable $cb)
-    {
-        // $ch = new Channel(0);
-        // $tid = self::tid();
-        //
-        // SwCo::create(function () use($cb, $ch, $tid) {
-        //     $ret = $cb();
-        //     $ch->push($ret);
-        // });
     }
 
     /**
@@ -110,20 +95,19 @@ class Coroutine
             return;
         }
 
-        SwCo::sleep($seconds);
+        SwCoroutine::sleep($seconds);
     }
 
     /**
      * 挂起当前协程
-     * @param string $coId
      */
-    public static function suspend($coId)
+    public static function suspend()
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return;
         }
 
-        SwCo::suspend($coId);
+        SwCoroutine::yield();
     }
 
     /**
@@ -136,6 +120,6 @@ class Coroutine
             return;
         }
 
-        SwCo::resume($coId);
+        SwCoroutine::resume($coId);
     }
 }
