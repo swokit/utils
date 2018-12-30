@@ -21,7 +21,7 @@ class Await
      * @param float    $timeout
      * @return mixed
      */
-    public static function one(callable $fn, float $timeout = 2)
+    public static function run(callable $fn, float $timeout = 2)
     {
         $chan = new Channel(1);
 
