@@ -37,17 +37,17 @@ final class ServerUtil
      */
     public static function getRuntimeEnv(): array
     {
-        $yes = '<info>√</info>';
-        $no = '<danger>X</danger>';
+        $yes  = '<info>√</info>';
+        $no   = '<danger>X</danger>';
         $tips = '<danger>please disabled</danger>';
 
         return [
-            'Php version is gt 7.1' => version_compare(PHP_VERSION, '7.1') ? $yes : $no,
-            'Swoole is installed' => class_exists(Server::class, false) ? $yes : $no,
-            'Swoole version is gt 2' => version_compare(SWOOLE_VERSION, '2.0') ? $yes : $no,
+            'Php version is gt 7.1'       => version_compare(PHP_VERSION, '7.1') ? $yes : $no,
+            'Swoole is installed'         => class_exists(Server::class, false) ? $yes : $no,
+            'Swoole version is gt 2'      => version_compare(SWOOLE_VERSION, '2.0') ? $yes : $no,
             'Swoole Coroutine is enabled' => class_exists(Coroutine::class, false) ? $yes : $no,
-            'XDebug extension exists' => \extension_loaded('xdebug') ? $yes . "($tips)" : $no,
-            'xProf extension exists' => \extension_loaded('xprof') ? $yes . "($tips)" : $no,
+            'XDebug extension exists'     => \extension_loaded('xdebug') ? $yes . "($tips)" : $no,
+            'xProf extension exists'      => \extension_loaded('xprof') ? $yes . "($tips)" : $no,
         ];
     }
 
@@ -89,7 +89,7 @@ final class ServerUtil
 
     /**
      * @param string $file
-     * @param bool $checkLive
+     * @param bool   $checkLive
      * @return int
      */
     public static function getPidFromFile(string $file, bool $checkLive = false): int
@@ -109,7 +109,7 @@ final class ServerUtil
     }
 
     /**
-     * @param int $masterPid
+     * @param int    $masterPid
      * @param string $pidFile
      * @return bool|int
      */

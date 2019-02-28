@@ -39,12 +39,12 @@ class Await
 
     /**
      * @param callable[] $fns
-     * @param float $timeout
+     * @param float      $timeout
      * @return array
      */
     public static function multi(array $fns, float $timeout = 2): array
     {
-        $len = \count($fns);
+        $len  = \count($fns);
         $chan = new Channel($len);
 
         foreach ($fns as $fn) {

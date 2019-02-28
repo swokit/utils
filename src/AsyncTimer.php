@@ -34,8 +34,8 @@ class AsyncTimer
 
         // save meta info
         self::$timers[$tid] = [
-            'type' => 'tick',
-            'ctime' => \time(), // add time.
+            'type'     => 'tick',
+            'ctime'    => \time(), // add time.
             'interval' => $ms,
         ];
 
@@ -55,8 +55,8 @@ class AsyncTimer
 
         // save meta info
         self::$timers[$tid] = [
-            'type' => 'after',
-            'ctime' => \time(), // add time.
+            'type'     => 'after',
+            'ctime'    => \time(), // add time.
             'interval' => $ms,
         ];
 
