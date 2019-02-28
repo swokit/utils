@@ -22,7 +22,7 @@ class AwaitTest extends TestCase
         \swoole_event_wait();
     }
 
-    public function testRun()
+    public function testRun(): void
     {
         \go(function () {
             $ret = Await::run(function () {
@@ -33,7 +33,7 @@ class AwaitTest extends TestCase
         });
     }
 
-    public function testMulti()
+    public function testMulti(): void
     {
         \go(function () {
             $ret = Await::multi([

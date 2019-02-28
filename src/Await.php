@@ -42,7 +42,7 @@ class Await
      * @param float $timeout
      * @return array
      */
-    public static function multi(array $fns, float $timeout = 2)
+    public static function multi(array $fns, float $timeout = 2): array
     {
         $len = \count($fns);
         $chan = new Channel($len);

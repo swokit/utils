@@ -21,7 +21,7 @@ final class ServerUtil
     /**
      * @throws \RuntimeException
      */
-    public static function checkRuntimeEnv()
+    public static function checkRuntimeEnv(): void
     {
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('Server must run in the CLI mode.');

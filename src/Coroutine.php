@@ -90,7 +90,7 @@ class Coroutine
     /**
      * @param int|float $seconds
      */
-    public static function sleep($seconds)
+    public static function sleep($seconds): void
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return;
@@ -102,7 +102,7 @@ class Coroutine
     /**
      * 挂起当前协程
      */
-    public static function suspend()
+    public static function suspend(): void
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return;
@@ -115,7 +115,7 @@ class Coroutine
      * 恢复某个协程，使其继续运行。
      * @param string $coId
      */
-    public static function resume($coId)
+    public static function resume($coId): void
     {
         if (!ServerUtil::coroutineIsEnabled()) {
             return;
